@@ -7,7 +7,7 @@
    Curso: TaLLer de eLectronica digitaL y reparacion de computadoras I
    Proyecto: Prender, apagar un led por el celular
    aLumno:carlos ceballos
-   Fecha: 26/06/2023
+   Fecha: 14/07/2023
 */
 #include <Ticker.h>
 #include <LedControl.h>   //libreria que me permite usar el controlador led max7219
@@ -27,7 +27,7 @@ byte FUEGO_0[8] = { //animacion de fuego
   B00001000
 };
 
-byte  FUEGO_1[8] = { // animacion
+byte  FUEGO_1[8] = { // animacion de fuego
    B0000000,
   B00011100,
   B00111110,
@@ -38,7 +38,7 @@ byte  FUEGO_1[8] = { // animacion
   B00001000
 };
 
-byte  HIELO_0[8] = {
+byte  HIELO_0[8] = { // estas animando el hielo 
   B00011000,
   B00111100,
   B01111110,
@@ -69,9 +69,9 @@ void medicion(void);
 Ticker medicionT(medicion, 2000);
 void setup() {
   Serial.begin(9600);
-  matrixcc.shutdown(0, false); //Activo el max7219 para poder mostrar los digitos.
-  matrixcc.setIntensity(0, 18); //Brillo a la mitad del luz
-  matrixcc.clearDisplay(0);    //limpiar display
+  matrizcc.shutdown(0, false); //Activo el max7219 para poder mostrar los digitos.
+  matrizcc.setIntensity(0, 18); //Brillo a la mitad del luz
+  matrizcc.clearDisplay(0);    //limpiar display
   Serial.println("Medidor de fuego y matriz led");
   medicionT.start();
 }
@@ -84,29 +84,29 @@ void loop() {
     //nieve
     for (int i = 0; i < 8; i++)
     {
-      matrixcc.setRow(0, i, HIELO_cc[i]);
+      matrizcc.setRow(0, i, HIELO_cc[i]);
 
     }
     delay(500);
-    matrixcc.clearDisplay(0);
+    matrizcc.clearDisplay(0);
   }
   if (conver > 40 ) {
     Serial.println("Fuego detectado");
     //fuego
     for (int i = 0; i < 8; i++) // mayor 8
     {
-      matrixcc.setRow(0, i, FUEGO_0[i]); // sobre animacion fuego prinera
+      matrizcc.setRow(0, i, FUEGO_0[i]); // sobre animacion fuego prinera
     }
     delay(1000);
     for (int i = 0; i < 8; i++)
     {
-      matrixcc.setRow(0, i, FUEGO_1[i]); // sobre animacion fuego 1
+      matrizcc.setRow(0, i, FUEGO_1[i]); // sobre animacion fuego 1
     }
 
     delay(1000);
     for (int i = 0; i < 8; i++)
     {
-      matrixcc.setRow(0, i, FUEGO_0[i]); // sobre animacion guego 3
+      matrizcc.setRow(0, i, FUEGO_0[i]); // sobre animacion guego 3
     }
 
 
